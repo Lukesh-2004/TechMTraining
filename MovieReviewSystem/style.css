@@ -1,1 +1,126 @@
+html {
+    scroll-padding-top: 55px;
+    scroll-behavior: smooth;
+}
 
+body {
+    background-color: #121212;
+    color: #fff;
+    padding-top: 55px;
+}
+
+.navbar {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* --- Carousel --- */
+#home {
+    width: 100%;
+    height: 850px;
+    overflow: hidden;
+}
+
+.carousel {
+    height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
+.carousel-item {
+    height: 100%;
+}
+
+.carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* --- Buttons --- */
+.btn-outline-success {
+    border-color: #0d6efd;
+    color: #0d6efd;
+}
+
+.btn-outline-success:hover {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* --- Titles --- */
+h1 {
+    text-align: center;
+    margin: 30px 0;
+    font-weight: bold;
+}
+
+/* --- Top Rated Section --- */
+.top-rated {
+    margin: 50px 0;
+}
+
+/* --- Movie Cards --- */
+.movie-card {
+    flex: 1 1 300px;
+    width: 300px;
+}
+
+.movie-card img {
+    height: 300px;
+    object-fit: cover;
+}
+
+/* --- Movie Carousel Fixes --- */
+.movie-carousel .carousel-inner {
+    display: block;
+}
+
+.movie-carousel .carousel-item {
+    display: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    /* Increased spacing */
+}
+
+.movie-carousel .carousel-item.active {
+    display: flex;
+    /* Show only the active slide */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* --- Responsive Fixes --- */
+@media (max-width: 1024px) {
+    #home {
+        height: 600px;
+        /* Adjust height for medium screens */
+    }
+
+    .carousel-item img {
+        height: 600px;
+    }
+
+    .movie-card {
+        width: 45%;
+        /* Two cards per row */
+    }
+}
+
+@media (max-width: 768px) {
+    #home {
+        height: 500px;
+    }
+
+    .carousel-item img {
+        height: 500px;
+    }
+
+    .movie-card {
+        width: 100%;
+        /* One card per row */
+    }
+}
