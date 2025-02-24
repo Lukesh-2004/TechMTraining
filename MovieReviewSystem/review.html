@@ -1,1 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%;
+            margin: auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .carousel img.active {
+            display: block;
+        }
+
+        .movie-details,
+        .review-section {
+            text-align: left;
+            padding: 10px;
+        }
+
+        .btn {
+            background-color: #e50914;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #b20710;
+        }
+
+        textarea,
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        .review-list {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 id="movie-title">Loading...</h1>
+        <div class="carousel">
+            <img id="img1" class="active" src="" alt="Movie Image 1">
+            <img id="img2" src="" alt="Movie Image 2">
+            <img id="img3" src="" alt="Movie Image 3">
+        </div>
+        <h3 id="movie-genre"></h3>
+        <p id="movie-description"></p>
+        <div class="movie-details">
+            <p><strong>Director:</strong> <span id="movie-director"></span></p>
+            <p><strong>Cast:</strong> <span id="movie-cast"></span></p>
+            <p><strong>Rating:</strong> <span id="movie-rating"></span></p>
+            <p><strong>Release Date:</strong> <span id="movie-release"></span></p>
+        </div>
+        <div class="review-section">
+            <h2>Submit a Review</h2>
+            <input type="text" id="reviewer-name" placeholder="Your Name">
+            <textarea id="review-text" placeholder="Write your review here..."></textarea>
+            <button class="btn" onclick="addReview()">Submit Review</button>
+            <div class="review-list" id="reviews">
+                <h2>Reviews</h2>
+                <p><strong>Karthick:</strong> Amazing movie, loved it! ⭐⭐⭐⭐⭐</p>
+                <p><strong>Janani:</strong> Great storyline and visuals. ⭐⭐⭐⭐☆</p>
+            </div>
+        </div>
+        <a href="index.html" class="btn">Go Back</a>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const movieName = urlParams.get("movie");
+        
+        const movies = {
+            "Dragon":
+            {
+                title: "Dragon",
+                genre: "Comedy / Drama / Romance",
+                description: "After a devastating breakup, troubled student Ragavan abandons his studies and enters the dangerous world of financial fraud, pursuing wealth and power while becoming entangled in escalating deception.",
+                director: "Ashwath Marimuthu",
+                cast: "Pradeep Ranganathan, Gautham Vasudev Menon, Anupama Parameswaran",
+                rating: "4.5/5",
+                release: "February 21, 2025",
+                images: ["https://images.justwatch.com/backdrop/325202958/s1920/dragon-2025.avif", "https://assets-in.bmscdn.com/iedb/movies/images/mobile/listing/medium/dragon-et00430623-1737717074.jpg", "https://assets.thehansindia.com/h-upload/2024/04/11/1438524-pradeep-ranganath-next.webp"]
+            },
+            "Neek":
+            {
+                title: "Nilavuku Enmel Ennadi Kobam",
+                genre: "Comedy / Drama / Romance",
+                description: "A young man on the rebound from a broken relationship accepts his parents' choice of a bride, only for his first-love to reconnect with him.",
+                director: "Dhanush",
+                cast: "Priyanka Arulmohan, Rabiya Khatoon, Venkatesh Menon",
+                rating: "4.5/5",
+                release: "February 21, 2025",
+                images: ["https://i.ytimg.com/vi/8tgawj_bh90/hq720.jpg", "https://images.ottplay.com/images/neek-1733927198.jpg", "https://onlookersmedia.in/wp-content/uploads/2025/01/NEEK-Movie-Poster.jpg"]
+            },
+
+            "Interstellar": {
+                title: "Interstellar",
+                genre: "Adventure / Drama / Sci-Fi",
+                description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+                director: "Christopher Nolan",
+                cast: "Matthew McConaughey, Anne Hathaway, Jessica Chastain",
+                rating: "4.7/5",
+                release: "November 7, 2014",
+                images: ["https://www.thebiline.com/wp-content/uploads/2024/11/interstellar-1-1200x625.webp", "https://media.vanityfair.com/photos/6759e8618206dfbaa0e61605/16:9/w_2000,h_1125,c_limit/Interstellar-rewatch.jpg", "https://english.lematinal.media/wp-content/uploads/2024/08/The-studio-refutes-a-report-that-Interstellar-70mm-prints-were-destroyed.jpg"]
+            },
+            "Inception": {
+                title: "Inception",
+                genre: "Action / Adventure / Sci-Fi",
+                description: "A thief who enters the dreams of others to steal secrets from their subconscious is given a chance to have his criminal history erased as payment for a seemingly impossible task: implanting an idea into someone's mind.",
+                director: "Christopher Nolan",
+                cast: "Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page",
+                rating: "4.8/5",
+                release: "July 16, 2010",
+                images: ["https://m.media-amazon.com/images/I/91G0gTLz6GL._AC_UF1000,1000_QL80_.jpg", "https://www.rollingstone.com/wp-content/uploads/2010/07/MCDINCE_EC037c.jpg", "https://static01.nyt.com/images/2010/07/25/arts/25scott-span/25scott-span-articleLarge.jpg"]
+            },
+            "Vidamuyarchi": {
+                title: "Vidamuyarchi",
+                genre: "Action / Thriller",
+                description: "An intense action thriller starring Ajith Kumar. The story revolves around a high-stakes mission that tests the limits of endurance and courage.",
+                director: "Magizh Thirumeni",
+                cast: "Ajith Kumar",
+                rating: "N/A",
+                release: "2024",
+                images: ["https://www.livemint.com/lm-img/img/2025/02/06/600x338/Vidaamuyarchi_1735819198806_1738852316166.jpg", "https://assetscdn1.paytm.com/images/cinema/Vidaamuyarchi-1b5d2620-d7fa-11ef-83bf-1dede4761f84.jpeg", "https://media.assettype.com/newindianexpress%2F2025-02-07%2Fk5wecnge%2FA-star.jpg"]
+
+            }
+
+
+
+        };
+        if (movieName && movies[movieName]) {
+            const movie = movies[movieName];
+            document.getElementById("movie-title").innerText = movie.title;
+            document.getElementById("movie-genre").innerText = `Genre: ${movie.genre}`;
+            document.getElementById("movie-description").innerText = movie.description;
+            document.getElementById("movie-director").innerText = movie.director;
+            document.getElementById("movie-cast").innerText = movie.cast;
+            document.getElementById("movie-rating").innerText = movie.rating;
+            document.getElementById("movie-release").innerText = movie.release;
+            document.getElementById("img1").src = movie.images[0];
+            document.getElementById("img2").src = movie.images[1];
+            document.getElementById("img3").src = movie.images[2];
+        } else {
+            document.getElementById("movie-title").innerText = "Movie not found";
+            document.getElementById("movie-description").innerText = "No details available.";
+        }
+        function addReview() {
+            const name = document.getElementById("reviewer-name").value.trim();
+            const review = document.getElementById("review-text").value.trim();
+            if (name && review) {
+                const reviewList = document.getElementById("reviews");
+                const newReview = document.createElement("p");
+                newReview.innerHTML = `<strong>${name}:</strong> ${review}`;
+                reviewList.appendChild(newReview);
+                document.getElementById("reviewer-name").value = "";
+                document.getElementById("review-text").value = "";
+            }
+        }
+        let index = 0;
+        const images = document.querySelectorAll(".carousel img");
+        function changeImage() {
+            images.forEach(img => img.classList.remove("active"));
+            index = (index + 1) % images.length;
+            images[index].classList.add("active");
+        }
+        setInterval(changeImage, 3000);
+    </script>
+</body>
+
+</html>
