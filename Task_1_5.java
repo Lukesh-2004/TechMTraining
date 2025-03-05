@@ -20,6 +20,6 @@ public class AlternateCaps {
 			}
 		}
 
-		System.out.println("Transformed String: " + result);
+		System.out.println("transformed string : " + result);
 	}
 }
