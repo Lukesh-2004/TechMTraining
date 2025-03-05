@@ -49,7 +49,7 @@ public class Anagram {
 
     public static void main(String[] args) {
         String s = "listening";
-        String p = "steni";
+        String p = "Lukesh";
 
         List<Integer> result = findAnagrams(s, p);
         System.out.println("Anagram start indices: " + result);
