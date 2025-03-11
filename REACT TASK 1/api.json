@@ -1,0 +1,49 @@
+{
+    "courses": [
+      {
+        "id": "1",
+        "title": "React Basics",
+        "description": "Learn React from scratch",
+        "instructor": "John Doe",
+        "enrollmentStatus": "Open",
+        "duration": "4 weeks",
+        "level": "Beginner"
+      },
+      {
+        "id": "2",
+        "title": "TypeScript Fundamentals",
+        "description": "Master TypeScript for scalable applications",
+        "instructor": "Jane Smith",
+        "enrollmentStatus": "Open",
+        "duration": "6 weeks",
+        "level": "Intermediate"
+      },
+      {
+        "id": "3",
+        "title": "Node.js Essentials",
+        "description": "Build robust backend applications with Node.js",
+        "instructor": "David Lee",
+        "enrollmentStatus": "Closed",
+        "duration": "8 weeks",
+        "level": "Intermediate"
+      },
+      {
+        "id": "4",
+        "title": "Full-Stack Development",
+        "description": "Learn MERN stack for full-stack development",
+        "instructor": "Sarah Jones",
+        "enrollmentStatus": "Open",
+        "duration": "12 weeks",
+        "level": "Advanced"
+      },
+      {
+        "id": "5",
+        "title": "Data Structures & Algorithms",
+        "description": "Optimize your coding skills with DSA",
+        "instructor": "Michael Brown",
+        "enrollmentStatus": "Open",
+        "duration": "10 weeks",
+        "level": "Intermediate"
+      }
+    ]
+  }
