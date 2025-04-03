@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'teams_page.dart';  // Page for adding football teams
-import 'place_bets_page.dart'; // Page for placing bets
-import 'homepage.dart';       // Home page for listing teams, scores, and odds
+import 'teams_page.dart'; 
+import 'betspage.dart'; 
+import 'homepage.dart';  
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,12 +38,12 @@ class MyApp extends StatelessWidget {
 
         return MaterialApp(
           title: 'Football Scores & Betting Odds',
-          debugShowCheckedModeBanner: false,  // Hides debug banner
+          debugShowCheckedModeBanner: false,  
           initialRoute: '/',
           routes: {
-            '/': (context) => HomePage(),        // Home Page
-            '/add_teams': (context) => AddTeamsPage(),  // Add Teams Page
-            '/place_bets': (context) => PlaceBetsPage(), // Place Bets Page
+            '/': (context) => HomePage(),        
+            '/add_teams': (context) => AddTeamsPage(),  
+            '/place_bets': (context) => PlaceBetsPage(), 
           },
         );
       },
